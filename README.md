@@ -1,70 +1,119 @@
-# Getting Started with Create React App
+      TOTAL 4 PAGES . (3 in navbar)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+      PAGE 1 INTRO
+      again adding an intro page for (set up or skip)
+      only display if the location is not saved in local storage
 
-## Available Scripts
+      PAGE 2 MAIN
+      if setup is not done (skipped) , give weather of dubai in home page
+    
+      COMPONENTS INSIDE
+      
+      0-
+      navbar : home active
 
-In the project directory, you can run:
+      1-
+      a weather header (inline flex)
+      div 1 : (flex colum)  current weather degree , location,feels like , day time long
+      div 2 : weather emoji
+      
+      2-
+      weather properties (inline flex)
+      div 1 : uv index (cloudy card) - <span><p>low</p> emoji </span> <b>UV Index</b>  
+      div 2 : humidity (cloudy card)- <span><p>90%</p> emoji </span> <b>Humidity</b> 
+      div 3 : Wind (cloudy card)- <span><p>5 km/h</p> emoji </span> <b>Wind</b> 
 
-### `npm start`
+      3-
+      <h1>Today</h1>
+      <div>Graph (width : 150% , overflow-x : scroll (dont show the scroll bar))</div>
+      <p>Movable(horizontal) graph pin </p>
+      <p>Graph titles</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+      4-
+      comming days (inline flex)(width : 150% , overflow-x : scroll )
+      div 1 :(flex colum) - <span><p>40 </p> emoji </span> <b>Today</b>  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+      
+      PAGE 3 : Weather around Us 
+      This would be weather around our country / favourite countries (saved from early search)(max 5)
 
-### `npm test`
+      COMPONENTS INSIDE :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+      1 - Dynamic heading according to the setup
+      <h1>Around Your Country </h1> or <h1>Your Favourite Places</h1>
 
-### `npm run build`
+      2 - input (locations list) (also make an array of 5 places that keep on updating with entries but max-number is 5 . Before entries make a default list of NewYork , London , Japan , Dubai , Sydney )
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+      3 -5 cloudy cards  (dynamic zones)
+  
+      Page 4 : setup/Personailze
+      Form 
+      i - location input or auto locate btn . (if auto locate = null then red color placeholder to enter the location manually)
+      ii - C/F switch
+      iii - Extreme Weather Notification Yes/No switch
+      
+      HELPING COMPONENTS :  
+      
+      1 -navbar at the bottom
+      navbar : home , location , setting
+      navbar button hover animation of moving top - 2vh
+      
+      2 - cloudy card - (its size should be dynamic)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+      3 - dynamicBg
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+      FONT SELECTION
+      Google roboto ,link added in index.html
+      https://fonts.google.com/specimen/Roboto
 
-### `npm run eject`
+      BG/COLOR THEME SELECTION
+      Three backgrounds 
+      1 - white black yellow background color according to the time zone (according to day / night )
+      2 - background picture (transparent sky)
+      3 - gradient (gradient changes with weather with slow transition )(transparent with weather color ) (skyblue / yellow / graiesh blue / )(clear snowy - sunny - hazy smoky windy - stormy rainy  )
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+      4 - ocean blue and offwhite theme
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    JS (BACKEND):
+    1 - params in main .  
+    most cloudy cards have links - these links open page (like main , but location is not saved in the local storage)
+    so  these links has param of days/places . so lets make the main page according to these params
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    2 - rapid api
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    3 - getData.js
+    getData with exception handling- means object to arrays of key and values.
 
-## Learn More
+    get data and save them in objects eg . 
+    i - nowWeather ={tmpC , tmpF , feelsLike , UV , Humidity , Wind}
+    ii - todayWeather ={weather list with time}
+    iii - comingWeather ={weather of coming days}
+    iv - emojiArray (maybe)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    v - curr ={currTime , currDate , currDay}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    vi - autoLocate = use built in location Navigation Api to get location
 
-### Code Splitting
+    vii - location = getitem.localStorage / defualt Dubai / autoLocate
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    viii - make a loading icon with fade with bg
 
-### Analyzing the Bundle Size
+    ix - dynamic bg gradient according to weather 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    iix - dynamic bg color change according to time zone
 
-### Making a Progressive Web App
+    iiix - notification alert it notice On . 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    4 - for page 4 save the setup to local storage 
 
-### Advanced Configuration
+    5 - the intro page setup btn goes to page 4 and skip btn goes to main page .
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    LocalStorage varaibles :
+    1 - curr location 
+    2 - centigrade true/false
+    3 - search location list
+    4 - notification true/false
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    Packages : 
+    react-router
+    

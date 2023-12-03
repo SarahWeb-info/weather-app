@@ -1,12 +1,21 @@
-import './App.css';
+import React from 'react';
+import './css/App.css';
+import Intro from './tabs/Intro';
+import Main from './tabs/Main.js';
+import AroundUs from './tabs/AroundUs';
+import Setting from './tabs/Setting.js';
+import { BrowserRouter , Routes , Route } from "react-router-dom";
 
-function App() {
+export default function App() {
+  
   return (
-    <div className="App">
-
-
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Intro />} />
+        <Route path="/app" element={<Main />} />
+        <Route path="/aroundUs" element={<AroundUs />} />
+        <Route path="/setting" element={<Setting />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;

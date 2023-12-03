@@ -1,0 +1,59 @@
+.introBanner{
+    padding: 2vw;
+    height: 55vh;
+    width: 100%;
+}
+
+.introBanner>div:nth-child(1) img , .introBanner>div:nth-child(3) img{
+    width: auto;
+    height: 15vh;
+}
+
+.introBanner>div:nth-child(2) img{
+    width: auto;
+    height: 30vh;
+}
+
+.intro h1 {
+    text-align: center;
+    color : var(--color );
+    font-size: 1.2rem;
+    width: 60%;
+}
+
+.intro h1>span{
+    font-size: 1.8rem;
+}
+
+.intro h1>span:last-child{
+    font-size: 3rem !important;
+}
+
+.introBtns{
+    box-sizing: border-box;
+    position: relative;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    height:10vh ;
+    width: 100%;
+    text-align: center;
+}
+.introBtns span{
+    background-color: var(--color);
+    width: 45%;
+    height: 100%;
+    border-radius: 1.5vw;
+}
+.introBtns a{
+    text-decoration: none;
+    letter-spacing: 0.1cm;
+    font-size: 1.2rem;
+    color : var(--bg);
+}
+.introBtns span:hover{
+    background-color: var(--bg);
+}
+.introBtns span:hover a{
+    color : var(--color);
+}
