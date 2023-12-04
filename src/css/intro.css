@@ -1,17 +1,21 @@
+.intro{
+    overflow: hidden;
+    background: url("cloudy.png") ,radial-gradient(circle,skyblue 38%, #cfd0cb 72%, rgb(248 254 255) 100%);
+    background-size: 300% 150% ,  150% ;
+    background-position: 0%  20% , left ;
+    background-repeat: no-repeat;
+    animation: float 20s both infinite;
+}
 .introBanner{
+    box-sizing: border-box;
     padding: 2vw;
     height: 55vh;
     width: 100%;
 }
 
-.introBanner>div:nth-child(1) img , .introBanner>div:nth-child(3) img{
+.introBanner img{
     width: auto;
-    height: 15vh;
-}
-
-.introBanner>div:nth-child(2) img{
-    width: auto;
-    height: 30vh;
+    height: 20vh;
 }
 
 .intro h1 {
@@ -40,20 +44,38 @@
     text-align: center;
 }
 .introBtns span{
-    background-color: var(--color);
-    width: 45%;
+    background-color: #5b585840;
+    width: 35%;
     height: 100%;
     border-radius: 1.5vw;
+    transition: 1s border; 
 }
 .introBtns a{
     text-decoration: none;
     letter-spacing: 0.1cm;
     font-size: 1.2rem;
-    color : var(--bg);
-}
-.introBtns span:hover{
-    background-color: var(--bg);
-}
-.introBtns span:hover a{
     color : var(--color);
 }
+.introBtns span:hover{
+    border: 8px double white;
+}
+.introBtns span:hover a{
+    font-weight: bold;
+}
+
+@-webkit-keyframes float {
+    0%, 100% {
+        background-position: 0%  0% , left ;
+    }
+    50% {
+        background-position: 0%  80% , left ;
+    }
+}
+@keyframes float {
+    0%, 100% {
+        background-position: 0%  0% , left ;
+    }
+    50% {
+        background-position: 0%  80% , left ;
+    }
+} 

@@ -60,7 +60,6 @@
       
       2 - cloudy card - (its size should be dynamic)
 
-      3 - dynamicBg
 
       FONT SELECTION
       Google roboto ,link added in index.html
@@ -116,4 +115,5 @@
 
     Packages : 
     react-router
+    react-icons
     
