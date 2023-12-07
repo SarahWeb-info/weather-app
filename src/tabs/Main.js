@@ -11,6 +11,26 @@ export default function main() {
     {name : "23" , react : 32 , angular : 40 , vue :12 },
     {name : "22" , react : 44 , angular : 48 , vue :22 },
     {name : "21" , react : 23 , angular : 50 , vue :55 },
+    {name : "20" , react : 11 , angular : 25 , vue :22 },
+    {name : "23" , react : 32 , angular : 40 , vue :12 },
+    {name : "22" , react : 44 , angular : 48 , vue :22 },
+    {name : "21" , react : 23 , angular : 50 , vue :55 },
+    {name : "20" , react : 11 , angular : 25 , vue :22 },
+    {name : "23" , react : 32 , angular : 40 , vue :12 },
+    {name : "22" , react : 44 , angular : 48 , vue :22 },
+    {name : "21" , react : 23 , angular : 50 , vue :55 },
+    {name : "20" , react : 11 , angular : 25 , vue :22 },
+    {name : "23" , react : 32 , angular : 40 , vue :12 },
+    {name : "22" , react : 44 , angular : 48 , vue :22 },
+    {name : "21" , react : 23 , angular : 50 , vue :55 },
+    {name : "20" , react : 11 , angular : 25 , vue :22 },
+    {name : "23" , react : 32 , angular : 40 , vue :12 },
+    {name : "22" , react : 44 , angular : 48 , vue :22 },
+    {name : "21" , react : 23 , angular : 50 , vue :55 },
+    {name : "20" , react : 11 , angular : 25 , vue :22 },
+    {name : "23" , react : 32 , angular : 40 , vue :12 },
+    {name : "22" , react : 44 , angular : 48 , vue :22 },
+    {name : "21" , react : 23 , angular : 50 , vue :55 },
     {name : "20" , react : 11 , angular : 25 , vue :22 }
   ];
   
@@ -19,7 +39,7 @@ export default function main() {
       if (active) {
         return (
           <div className="custom-tooltip">
-            <p className="label">{`Hour: ${label}`}</p>
+            <p className="label">{`${label} am`}</p>
             {payload.map((entry, index) => (
               <p key={index} className="value">{`${entry.name}: ${entry.value}`}</p>
             ))}
@@ -31,7 +51,7 @@ export default function main() {
     };
 
   return (
-    <div className='appContainer main'>
+    <div className='appContainer appBg'>
       <Navbar />
       <div className='flexInline justifyBetween px2'>
         <div className='flexColumn justifyCenter'>
@@ -48,7 +68,7 @@ export default function main() {
       </div>
       
 
-      <div className='flexInline justifyBetween px2 my2'>
+      <div className='flexInline justifyBetween my2'>
         <CloudyCard
          p = "Low"
          title = "UV Index"
@@ -69,17 +89,16 @@ export default function main() {
         />
       </div>
 
-      <h2>Today</h2>
-      <div className='my2'>
-        graph of 23 hours
-        <LineChart width={600} height={300} data={data} >
+      <h2 className='px2'>Today</h2>
+      <div className='wheelDiv my2' >
+        <LineChart width={1500} height={250} data={data} >
           <XAxis dataKey="name" />
           <Tooltip content={<CustomTooltip />}  />
           <Line type="monotone" dataKey="react"  stroke="lightblue" strokeWidth = {3}  />
         </LineChart>
       </div>
 
-      <div className='my2 wheelDiv'>
+      <div className='wheelDiv my2 flexInline alignCenter daysCloud' >
         <CloudyCard />
         <CloudyCard />
         <CloudyCard />

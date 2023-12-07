@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <div>
-      Made by Sarah Web 
+    <div className='footer'>
+      <div>Made by Sarah Web</div>
     </div>
   )
 }

@@ -19,11 +19,13 @@ export default function CloudyCard({
 
   useEffect(() => {
     const loadImg = async () => {
-      try {
-        const ImgModule = await import(`../weather/64x64/${emojiTime}/${emojiNo}.png`);
-        setImgLocation(ImgModule.default);
-      } catch (error) {
-        console.error('Error loading image:', error);
+      if (emojiNo === null) {
+        try {
+          const ImgModule = await import(`../weather/64x64/${emojiTime}/${emojiNo}.png`);
+          setImgLocation(ImgModule.default);
+        } catch (error) {
+          console.error('Error loading image:', error);
+        }
       }
     };
 
@@ -31,7 +33,7 @@ export default function CloudyCard({
   }, [emojiTime , emojiNo]);
 
   return (
-    <div className='cloudyCard' >
+    <div className='clouds'>
 
   <svg  width="100%" viewBox="0 0 500 400">
   <filter id="f1" x="0" y="0" width="100%" height="100%">
@@ -71,7 +73,7 @@ export default function CloudyCard({
             )}
         
         {imgLocation && (
-            <image xlinkHref={imgLocation} x="200" y="-55" width="300"  />
+            <image xlinkHref={imgLocation} x="200" y="-55" width="280"  />
         )}
 
         {title && 

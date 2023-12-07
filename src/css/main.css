@@ -1,13 +1,17 @@
-.main{
-    background: url("cloudy.png") ,radial-gradient(circle, var(--backdrop) 68%, rgba(98, 132, 140, 0.8) 100%);
-    background-size: 300% 100% , 120% 130% ;
-    background-repeat: no-repeat;
-    background-blend-mode: multiply;
+.mainImg{
+    min-width: 25%;
+    height: auto;
 }
 
-.mainImg{
-    min-width: 25vw;
-    height: auto;
+.wheelDiv::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
+  
+.wheelDiv{
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
 }
 
 .custom-tooltip{
@@ -21,19 +25,6 @@
 
 }
 
-.wheelDiv {
-    display: inline-flex;
-    justify-content: space-between;
-    padding-left: 2vw;
-    height: fit-content;
-    width: auto;
-    min-width: 130vw;
-    overflow-x: scroll;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer/Edge */
-    border: 1px solid green;
-  }
-  
-  .wheelDiv::-webkit-scrollbar {
-    display: none; /* Webkit (Safari, Chrome) */
-  }
+.daysCloud>div{
+    min-width: 30%;
+}

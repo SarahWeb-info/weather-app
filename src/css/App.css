@@ -11,7 +11,6 @@
 
     --appWidth : 98vw;
     --navHeight : 6vh;
-    --glass :  #5b585840 ; 
   }
   .appContainer{
     box-sizing: border-box;
@@ -21,6 +20,13 @@
     height: auto;
     min-height: 100vh;
     overflow-x: hidden;
+    color: var(--color);
+}
+.appBg{
+  background: url("cloudy.png") ,radial-gradient(circle, var(--backdrop) 68%, rgba(98, 132, 140, 0.8) 100%);
+  background-size: 300% 100% , 120% 130% ;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
 }
 h1{
   font-size: 2rem;
@@ -47,6 +53,9 @@ a{
 }
 .px2{
   padding: 0 2vw;
+}
+.m2{
+  margin : 2vw;
 }
 .my2{
   margin : 2vh auto;
@@ -75,10 +84,48 @@ a{
   .justifyAround{
     justify-content: space-around;
   }
+  .footer{
+    margin-top: 50vh;
+    margin-bottom: 20vh;
+    height: auto;
+    width: 100%;
+    font-size: small;
+    text-align: right;
+  }
+  .footer>div{
+    padding: 0.5vw;
+    /* background-color: #f0f8ff42; */
+    -webkit-box-shadow: inset 24px 5px 25px 5px #f0f8ff42; 
+    box-shadow: inset 24px 5px 25px 5px #f0f8ff42;
+  }
 
-  @media screen and (min-width: 786px) {
+  /* aroundUs */
+  input[type="text"] {
+    width: 90%;
+    height: fit-content;
+    border-radius: 3.34vw;
+    border: 1px solid var(--color);
+    background-color: transparent;
+    font-size: 1.2rem;
+    color : var(--color);
+    padding-left: 1vw;
+    box-sizing: border-box;
+  }
+
+  
+  .clouds{
+    width: 80%;
+    max-width: 250px;
+    height: auto;
+  }
+
+ .settingForm span{
+    display: block;
+    /* display: inline-flex; */
+  }
+  @media screen and (min-width: 580px) {
     :root{
-      --appWidth : 786px;
+      --appWidth : 580px;
     }  
   }
         
