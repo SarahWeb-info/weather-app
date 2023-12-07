@@ -4,7 +4,7 @@ import { MdHome , MdLocationOn , MdPerson} from "react-icons/md";
 
 
 export default function Navbar() {
-  const noBorder = {'border-radius': '0'};
+  const noBorder = {'borderRadius': '0'};
   const rightBorder = {'border-top-right-radius': '3vw'};
   const leftBorder = {'border-top-left-radius': '3vw'};
 

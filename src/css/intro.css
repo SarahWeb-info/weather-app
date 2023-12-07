@@ -34,14 +34,9 @@
 }
 
 .introBtns{
-    box-sizing: border-box;
     position: relative;
-    display: inline-flex;
-    justify-content: space-around;
-    align-items: center;
     height:10vh ;
     width: 100%;
-    text-align: center;
 }
 .introBtns span{
     background-color: #5b585840;

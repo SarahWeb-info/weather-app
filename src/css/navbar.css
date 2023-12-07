@@ -1,6 +1,6 @@
 .navbar{
     position: fixed;
-    bottom : 5vh ;
+    bottom : 1.5vh ;
     box-sizing: border-box;
     width: calc(var(--appWidth) - 3vw);
     margin: 0 1.5vw;
@@ -11,6 +11,7 @@
     box-shadow: 2px 4px 13px 5px rgba(0,0,0,0.3);
     display: inline-flex;
     align-items: flex-end;
+    z-index: 200;
 }
 .navbar a{
     font-size: 2rem;
