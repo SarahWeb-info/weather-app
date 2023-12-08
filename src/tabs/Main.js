@@ -1,47 +1,93 @@
-import React from 'react';
+// import React  from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import CloudyCard from '../components/CloudyCard';
 import Footer from '../components/Footer';
-import Img from '../weather/64x64/day/113.png';
 import {LineChart , Line , XAxis , Tooltip } from "recharts";
 import "../css/main.css";
 
-export default function main() {
-  const data = [
-    {name : "23" , react : 32 , angular : 40 , vue :12 },
-    {name : "22" , react : 44 , angular : 48 , vue :22 },
-    {name : "21" , react : 23 , angular : 50 , vue :55 },
-    {name : "20" , react : 11 , angular : 25 , vue :22 },
-    {name : "23" , react : 32 , angular : 40 , vue :12 },
-    {name : "22" , react : 44 , angular : 48 , vue :22 },
-    {name : "21" , react : 23 , angular : 50 , vue :55 },
-    {name : "20" , react : 11 , angular : 25 , vue :22 },
-    {name : "23" , react : 32 , angular : 40 , vue :12 },
-    {name : "22" , react : 44 , angular : 48 , vue :22 },
-    {name : "21" , react : 23 , angular : 50 , vue :55 },
-    {name : "20" , react : 11 , angular : 25 , vue :22 },
-    {name : "23" , react : 32 , angular : 40 , vue :12 },
-    {name : "22" , react : 44 , angular : 48 , vue :22 },
-    {name : "21" , react : 23 , angular : 50 , vue :55 },
-    {name : "20" , react : 11 , angular : 25 , vue :22 },
-    {name : "23" , react : 32 , angular : 40 , vue :12 },
-    {name : "22" , react : 44 , angular : 48 , vue :22 },
-    {name : "21" , react : 23 , angular : 50 , vue :55 },
-    {name : "20" , react : 11 , angular : 25 , vue :22 },
-    {name : "23" , react : 32 , angular : 40 , vue :12 },
-    {name : "22" , react : 44 , angular : 48 , vue :22 },
-    {name : "21" , react : 23 , angular : 50 , vue :55 },
-    {name : "20" , react : 11 , angular : 25 , vue :22 }
-  ];
-  
+import today from "../backend/GetToday";
+
+export default function Main() {
+
+  let tmpDegreeFormat = "°C";
+  let tmphourlyFormat = today.hourlyTmpC;
+
+  useEffect(() => {
+      let location = 'Lahore';
+      let today = new Date();
+
+      // Create variables for the next five days
+      let fulldate3 = new Date(today);
+      fulldate3.setDate(today.getDate() + 3);
+      let date4 = fulldate3.toISOString().split('T')[0];
+
+      let fulldate4 = new Date(today);
+      fulldate4.setDate(today.getDate() + 4);
+      let date5 = fulldate3.toISOString().split('T')[0];
+
+      let fulldate5 = new Date(today);
+      fulldate5.setDate(today.getDate() + 5);
+      let date6 = fulldate3.toISOString().split('T')[0];
+
+    //   const fetchData = async () => {
+   
+    //     try {
+    //     let apikey = process.env.REACT_APP_APIKEY;
+
+    //     const url1 = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&days=3`;
+    //     const url2 = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&dt=${date4}`;
+    //     const url3 = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&dt=${date5}`;
+    //     const url4 = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&dt=${date6}`;
+
+    //     const options = {
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         'X-RapidAPI-Key': `${apikey}`,
+    //         'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'       
+    //       },
+    //     };
+
+    //     const [response1, response2 , response3 , response4 ] = await Promise.all([
+    //       fetch(url1, options),
+    //       fetch(url2, options),
+    //       fetch(url3, options),
+    //       fetch(url4, options),
+    //     ]);
+
+    //     const result1 = await response1.json();
+    //     const result2 = await response2.json();
+    //     const result3 = await response3.json();
+    //     const result4 = await response4.json();
+
+    //     console.log('Data from API 1:', result1);
+    //     console.log('Data from API 2:', result2);
+    //     console.log('Data from API 3:', result3);
+    //     console.log('Data from API 4:', result4);
+    //   } catch (error) {
+    //     console.error('Error fetching data:', error);
+    //   }
+    // };
+
+    // fetchData();
+  }, []); 
+
+  let houlryGraphData = [];
+  for (let i in tmphourlyFormat){
+    if(i < 13){
+      houlryGraphData.push({ name : `${i} am` , tmp : tmphourlyFormat[i]});
+    }else {
+      houlryGraphData.push({ name : `${i-12} pm` , tmp : tmphourlyFormat[i]});
+    }
+  }
+
     // Custom tooltip content
-    const CustomTooltip = ({ active, payload, label }) => {
+    const CustomTooltip = ({ active, payload }) => {
       if (active) {
         return (
           <div className="custom-tooltip">
-            <p className="label">{`${label} am`}</p>
             {payload.map((entry, index) => (
-              <p key={index} className="value">{`${entry.name}: ${entry.value}`}</p>
+              <p key={index} className="value" style={{ fontSize: '10px'}}>{`${entry.value}${tmpDegreeFormat}`}</p>
             ))}
           </div>
         );
@@ -56,45 +102,42 @@ export default function main() {
       <div className='flexInline justifyBetween px2'>
         <div className='flexColumn justifyCenter'>
           <span>
-            <h1>25&deg;C</h1>
-            <h2>Milan , Italy</h2>
+            <h1>{today.tempDegC}{tmpDegreeFormat}</h1>
+            <h2>{today.city}, {today.country}</h2>
           </span>
 
-          <p>26/29&deg; Feels like 30</p>
-          <p>Fri ,02:30 am</p>
+          <p>{today.hightempDegC}/{today.lowtempDegC} {tmpDegreeFormat}; Feels like {today.feelsLikeC}</p>
+          <p>{today.dayOfWeek} , {today.time} </p>
         </div>
 
-        <img src={Img} alt="" className='mainImg'/>
+        <img src={today.iconUrl} alt="" className='mainImg'/>
       </div>
       
 
       <div className='flexInline justifyBetween my2'>
         <CloudyCard
-         p = "Low"
+         p = {today.uv}
          title = "UV Index"
-         emojiTime = "day"
-         emojiNo = "113"
+         icon = "https://cdn.weatherapi.com/weather/64x64/day/113.png"
         />
         <CloudyCard
-         p = "38&deg;"
+         p = {today.humidity}
          title = "Humidity"
-         emojiTime = "day"
-         emojiNo = "116"
+         icon = "https://cdn.weatherapi.com/weather/64x64/day/116.png"
         />
         <CloudyCard
-         p = "5 Km/h"
+         p = {today.wind}
          title = "Wind"
-         emojiTime = "day"
-         emojiNo = "185"
+         icon = "https://cdn.weatherapi.com/weather/64x64/day/122.png"
         />
       </div>
 
       <h2 className='px2'>Today</h2>
-      <div className='wheelDiv my2' >
-        <LineChart width={1500} height={250} data={data} >
+      <div className='wheelDiv my2'style={{fontSize : '0.8rem' }} >
+        <LineChart width={1500} height={250} data={houlryGraphData} >
           <XAxis dataKey="name" />
           <Tooltip content={<CustomTooltip />}  />
-          <Line type="monotone" dataKey="react"  stroke="lightblue" strokeWidth = {3}  />
+          <Line type="monotone" dataKey="tmp"  stroke="lightblue" strokeWidth = {3}  />
         </LineChart>
       </div>
 

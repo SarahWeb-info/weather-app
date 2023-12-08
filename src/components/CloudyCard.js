@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 export default function CloudyCard({
   p = null,
-  emojiTime = null,
-  emojiNo = null,
+  icon = null ,
   degree = null,
   linkStr = null,
   title = null,
@@ -13,24 +12,6 @@ export default function CloudyCard({
   const doc = document.documentElement;
   const root = getComputedStyle(doc);
   const rootColor = root.getPropertyValue('--color');
-  // const rootGlassBg = "#b9d8e4;";
-
-  const [imgLocation, setImgLocation] = useState(null);
-
-  useEffect(() => {
-    const loadImg = async () => {
-      if (emojiNo === null) {
-        try {
-          const ImgModule = await import(`../weather/64x64/${emojiTime}/${emojiNo}.png`);
-          setImgLocation(ImgModule.default);
-        } catch (error) {
-          console.error('Error loading image:', error);
-        }
-      }
-    };
-
-    loadImg();
-  }, [emojiTime , emojiNo]);
 
   return (
     <div className='clouds'>
@@ -72,8 +53,8 @@ export default function CloudyCard({
               </a>
             )}
         
-        {imgLocation && (
-            <image xlinkHref={imgLocation} x="200" y="-55" width="280"  />
+        {icon && (
+            <image xlinkHref={icon} x="200" y="-55" width="280"  />
         )}
 
         {title && 
