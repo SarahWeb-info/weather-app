@@ -6,71 +6,66 @@ import Footer from '../components/Footer';
 import {LineChart , Line , XAxis , Tooltip } from "recharts";
 import "../css/main.css";
 
-import today from "../backend/GetToday";
+import getRequest from '../backend/getRequest';
+import {dayData} from "../backend/formatData";
 
 export default function Main() {
+  
+  let location = localStorage.getItem('weatherLocation') || "Dubai" ;
+  let today ;
+  let tmpDegreeFormat = "C";
+  let storageDegreeFormat = localStorage.getItem('weatherDegree') || 1 ;
+  let tmphourlyFormat;
 
-  let tmpDegreeFormat = "°C";
-  let tmphourlyFormat = today.hourlyTmpC;
+  if (storageDegreeFormat == 1) {
+    tmpDegreeFormat = "C";
+  }else{
+    tmpDegreeFormat = "F";
+  }
 
-  useEffect(() => {
-      let location = 'Lahore';
-      let today = new Date();
+  let dateObj = new Date();
+  // Create variables for the next five days
+  let fulldate3 = new Date(dateObj) ;
+  fulldate3.setDate(dateObj.getDate() + 2);
+  let day3 = fulldate3.toLocaleDateString('en-US', { weekday: 'short' }); 
 
-      // Create variables for the next five days
-      let fulldate3 = new Date(today);
-      fulldate3.setDate(today.getDate() + 3);
-      let date4 = fulldate3.toISOString().split('T')[0];
+  let fulldate4 = new Date(dateObj);
+  fulldate4.setDate(dateObj.getDate() + 3);
+  let date4 = fulldate4.toISOString().split('T')[0];
+  let day4 = fulldate4.toLocaleDateString('en-US', { weekday: 'short' }); 
+  
+  let fulldate5 = new Date(dateObj);
+  fulldate5.setDate(dateObj.getDate() + 4);
+  let date5 = fulldate5.toISOString().split('T')[0];
+  let day5 = fulldate5.toLocaleDateString('en-US', { weekday: 'short' }); 
+  
+  let fulldate6 = new Date(dateObj);
+  fulldate6.setDate(dateObj.getDate() + 5);
+  let date6 = fulldate6.toISOString().split('T')[0];
+  let day6 = fulldate6.toLocaleDateString('en-US', { weekday: 'short' }); 
 
-      let fulldate4 = new Date(today);
-      fulldate4.setDate(today.getDate() + 4);
-      let date5 = fulldate3.toISOString().split('T')[0];
+  let day2Weather ;
+  let day3Weather ;
+  let day4Weather ;
+  let day5Weather ;
+  let day6Weather ;
 
-      let fulldate5 = new Date(today);
-      fulldate5.setDate(today.getDate() + 5);
-      let date6 = fulldate3.toISOString().split('T')[0];
+  useEffect(() => {    
+    let currDate = getRequest(location , 3);  
+    today = dayData(currDate , storageDegreeFormat);
+    
+    day2Weather = dayData(today.forecast.forecastday[1] , storageDegreeFormat);
+    day3Weather = dayData(today.forecast.forecastday[2] , storageDegreeFormat);
 
-    //   const fetchData = async () => {
-   
-    //     try {
-    //     let apikey = process.env.REACT_APP_APIKEY;
+    let forcastData4 = getRequest(location , 0 , date4 );
+    let forcastData5 = getRequest(location , 0 , date5 );
+    let forcastData6 = getRequest(location , 0 , date6 );
+    
+    day4Weather = dayData(forcastData4 , storageDegreeFormat);
+    day5Weather = dayData(forcastData5 , storageDegreeFormat);
+    day6Weather = dayData(forcastData6 , storageDegreeFormat);
 
-    //     const url1 = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&days=3`;
-    //     const url2 = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&dt=${date4}`;
-    //     const url3 = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&dt=${date5}`;
-    //     const url4 = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&dt=${date6}`;
-
-    //     const options = {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'X-RapidAPI-Key': `${apikey}`,
-    //         'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'       
-    //       },
-    //     };
-
-    //     const [response1, response2 , response3 , response4 ] = await Promise.all([
-    //       fetch(url1, options),
-    //       fetch(url2, options),
-    //       fetch(url3, options),
-    //       fetch(url4, options),
-    //     ]);
-
-    //     const result1 = await response1.json();
-    //     const result2 = await response2.json();
-    //     const result3 = await response3.json();
-    //     const result4 = await response4.json();
-
-    //     console.log('Data from API 1:', result1);
-    //     console.log('Data from API 2:', result2);
-    //     console.log('Data from API 3:', result3);
-    //     console.log('Data from API 4:', result4);
-    //   } catch (error) {
-    //     console.error('Error fetching data:', error);
-    //   }
-    // };
-
-    // fetchData();
-  }, []); 
+     }, []); 
 
   let houlryGraphData = [];
   for (let i in tmphourlyFormat){
@@ -81,20 +76,20 @@ export default function Main() {
     }
   }
 
-    // Custom tooltip content
-    const CustomTooltip = ({ active, payload }) => {
-      if (active) {
-        return (
-          <div className="custom-tooltip">
-            {payload.map((entry, index) => (
-              <p key={index} className="value" style={{ fontSize: '10px'}}>{`${entry.value}${tmpDegreeFormat}`}</p>
-            ))}
-          </div>
-        );
-      }
-  
-      return null;
-    };
+  // Custom tooltip content
+  const CustomTooltip = ({ active, payload }) => {
+    if (active) {
+      return (
+        <div className="custom-tooltip">
+          {payload.map((entry, index) => (
+            <p key={index} className="value" style={{ fontSize: '10px'}}>{`${entry.value}${tmpDegreeFormat}`}</p>
+          ))}
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   return (
     <div className='appContainer appBg'>
@@ -102,11 +97,11 @@ export default function Main() {
       <div className='flexInline justifyBetween px2'>
         <div className='flexColumn justifyCenter'>
           <span>
-            <h1>{today.tempDegC}{tmpDegreeFormat}</h1>
+            <h1>{today.tempDeg}{tmpDegreeFormat}</h1>
             <h2>{today.city}, {today.country}</h2>
           </span>
 
-          <p>{today.hightempDegC}/{today.lowtempDegC} {tmpDegreeFormat}; Feels like {today.feelsLikeC}</p>
+          <p>{today.hightempDeg}/{today.lowtempDeg} {tmpDegreeFormat}; Feels like {today.feelsLike}</p>
           <p>{today.dayOfWeek} , {today.time} </p>
         </div>
 
@@ -142,12 +137,49 @@ export default function Main() {
       </div>
 
       <div className='wheelDiv my2 flexInline alignCenter daysCloud' >
-        <CloudyCard />
-        <CloudyCard />
-        <CloudyCard />
-        <CloudyCard />
-        <CloudyCard />
-        <CloudyCard />
+        <CloudyCard
+          degree = {today.tempDeg}
+          linkStr = {today.condition}
+          title = "Today"
+          icon = {today.iconUrl}
+          />
+
+        <CloudyCard
+          degree = {day2Weather.avgtmpDeg}
+          linkStr = {day2Weather.nextCondition}
+          title = "Tomorrow"
+          icon = {day2Weather.nextIconUrl}
+        />  
+  
+        <CloudyCard
+          degree = {day3Weather.avgtmpDeg}
+          linkStr = {day3Weather.nextCondition}
+          title = {day3}
+          icon = {day3Weather.nextIconUrl}
+          />  
+
+
+        <CloudyCard
+          degree = {day4Weather.avgtmpDeg}
+          linkStr = {day4Weather.nextCondition}
+          title = {day4}
+          icon = {day4Weather.nextIconUrl}
+          />  
+
+        <CloudyCard
+          degree = {day5Weather.avgtmpDeg}
+          linkStr = {day5Weather.nextCondition}
+          title = {day5}
+          icon = {day5Weather.nextIconUrl}
+          />
+
+        <CloudyCard
+          degree = {day6Weather.avgtmpDeg}
+          linkStr = {day6Weather.nextCondition}
+          title = {day6}
+          icon = {day6Weather.nextIconUrl}
+          />
+
       </div>
 
       <Footer />

@@ -75,6 +75,7 @@ a{
   .alignCenter{
     align-items: center;
   }
+  
   .justifyCenter{
     justify-content: center;
   }
@@ -84,6 +85,7 @@ a{
   .justifyAround{
     justify-content: space-around;
   }
+  
   .footer{
     margin-top: 50vh;
     margin-bottom: 20vh;
@@ -111,17 +113,43 @@ a{
     padding-left: 1vw;
     box-sizing: border-box;
   }
+  input::placeholder {
+    font-style: italic;
+    font-size: small;
+    padding-left: 1vw;
+  }
 
-  
+  .btn{
+    border-radius: 1.5vw;
+    color: var(--bg);
+    background-color: var(--color);
+    border: 4px double var(--color);
+    box-sizing: border-box;
+    width: fit-content;
+    height: auto;
+    min-width: 150px;
+    padding: 1vh 3vw;
+    margin: 1.5vh auto;
+    font-weight: bold;
+    font-size: large;
+    -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.82); 
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.82);
+    transition: 1s;
+  }  
+  .btn:hover{
+    color: var(--color);
+    background-color:var(--bg);
+    border: 4px double var(--color);
+  }
   .clouds{
     width: 80%;
-    max-width: 250px;
+    max-width: 180px;
     height: auto;
   }
 
  .settingForm span{
-    display: block;
-    /* display: inline-flex; */
+    display: inline-flex;
+    width: 100%;
   }
   @media screen and (min-width: 580px) {
     :root{

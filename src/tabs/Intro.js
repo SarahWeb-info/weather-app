@@ -1,12 +1,11 @@
 import React from 'react';
 import "../css/intro.css";
-import Emo3 from '../weather/64x64/night/182.png';
 
 export default function Intro() {
   return (
     <div className='appContainer flexColumn alignCenter intro'>
      <div className=' flexColumn alignCenter justifyCenter introBanner'>
-        <img src={Emo3} alt=""  />
+        <img src="https://cdn.weatherapi.com/weather/64x64/day/182.png" alt=""  />
     </div>
     <div className=' flexColumn alignCenter '>
       <h1>Prepare <span>Yourself</span> for the <span>lastest</span> weather precision by <span>Mosam</span></h1>
