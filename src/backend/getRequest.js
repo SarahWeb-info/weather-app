@@ -1,9 +1,8 @@
-const getRequest = async (location , days = 3 , dt )=>{
-
+const getRequest = async (location , dt )=>{
     try {
     let apikey = process.env.REACT_APP_APIKEY;
-
-    const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&days=${days}&dt=${dt}`;
+    
+    const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${location}&days=3&dt=${dt}`;
 
     const options = {
       headers: {
@@ -18,13 +17,10 @@ const getRequest = async (location , days = 3 , dt )=>{
     ]);
 
     const result = await response.json();
-
-    console.log('Data from getDataDay:', result);
-    
     return result ;
 
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching data in getRequest :', error);
   }
 };
 

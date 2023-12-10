@@ -92,9 +92,10 @@ a{
     height: auto;
     width: 100%;
     font-size: small;
-    text-align: right;
+    text-align: center;
   }
-  .footer>div{
+  .footer>i{
+    border-radius: 0.5vw;
     padding: 0.5vw;
     /* background-color: #f0f8ff42; */
     -webkit-box-shadow: inset 24px 5px 25px 5px #f0f8ff42; 

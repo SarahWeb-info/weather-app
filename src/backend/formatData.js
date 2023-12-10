@@ -2,14 +2,19 @@
 // in dt=2010-6-12 request forecastday[0] is the only data available of the given date .
 // forcastFunc is to format forecastday[] data
 
-const forecastFunc = (param , storageDegreeFormat = 1) => {
+const forecastFunc = (param , storageDegreeFormat = "1") => {
+
+    const date = new Date(param.date);
+
+    const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
+
     let forcastDay = param.day || null;
 
     let hightempDeg ;
     let lowtempDeg;
     let avgtmpDeg ;
 
-    if (storageDegreeFormat === 1) {
+    if (storageDegreeFormat === "1") {
         hightempDeg = forcastDay.maxtemp_c || null;
         lowtempDeg = forcastDay.mintemp_c || null;
         avgtmpDeg = forcastDay.avgtemp_c || null;
@@ -22,6 +27,7 @@ const forecastFunc = (param , storageDegreeFormat = 1) => {
     let nextCondition = forcastDay.condition.text || null;
     let nextIcon = forcastDay.condition.icon || null;
     let nextIconUrl = `https:${nextIcon}`;
+    
 
     let forcastHour = param.hour || null;
     
@@ -29,7 +35,7 @@ const forecastFunc = (param , storageDegreeFormat = 1) => {
     
     for (let i in forcastHour){
         
-        if (storageDegreeFormat === 1) {
+        if (storageDegreeFormat === "1") {
             hourlyTmp.push(forcastHour[i].temp_c);
         }else{
             hourlyTmp.push(forcastHour[i].temp_f);
@@ -37,18 +43,19 @@ const forecastFunc = (param , storageDegreeFormat = 1) => {
     }
 
     return {
-        nextCondition,
-        nextIconUrl,
-        hightempDeg , 
+        avgtmpDeg,
+        hightempDeg,
         lowtempDeg ,
-        hourlyTmp,
-        avgtmpDeg
+        dayOfWeek ,
+        hourlyTmp ,
+        nextIconUrl,
+        nextCondition ,
     };
 } 
 
 // this is to format data with days=3 and no dt . 
 //storageDegreeFormat = 1 is C
-const dayData =(data , storageDegreeFormat = 1 )=> {
+const dayData =(data , storageDegreeFormat = "1" )=> {
 
     let city = data.location.name || null;
     let country = data.location.country || null;
@@ -56,7 +63,7 @@ const dayData =(data , storageDegreeFormat = 1 )=> {
     let tempDeg;
     let feelsLike;
 
-    if (storageDegreeFormat === 1) {
+    if (storageDegreeFormat === "1") {
         tempDeg = data.current.temp_c || null;
         feelsLike = data.current.feelslike_c || null; 
     }else{
@@ -64,15 +71,13 @@ const dayData =(data , storageDegreeFormat = 1 )=> {
         feelsLike = data.current.feelslike_f || null;
     }
 
-    let condition = data.current.condition.text;
+    let condition = data.current.condition.text;   
 
     let isDay = data.current.is_day || null; // let change to stary bg when its night
     
     let timeUnformated = data.location.localtime  || null; 
     
     const date = new Date(timeUnformated);
-
-    const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
 
     const time = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 
@@ -85,36 +90,26 @@ const dayData =(data , storageDegreeFormat = 1 )=> {
     
     let wind = data.current.wind_kph || null;
     
-    let forecastObj = forecastFunc(data.forecast.forecastday[0] , storageDegreeFormat );
-
-    let {
-        nextCondition,
-        nextIconUrl,
-        hightempDeg,
-        lowtempDeg ,
-        hourlyTmp,
-        avgtmpDeg
-    } = forecastObj;
-
+    let forecastObj1 = forecastFunc(data.forecast.forecastday[0] , storageDegreeFormat );
+    let forecastObj2 = forecastFunc(data.forecast.forecastday[1] , storageDegreeFormat );
+    let forecastObj3 = forecastFunc(data.forecast.forecastday[2] , storageDegreeFormat );
+    
     return {
         city , 
         country , 
         tempDeg , 
-        hightempDeg,
-        lowtempDeg ,
         feelsLike , 
         condition,
         isDay ,
-        dayOfWeek ,
         time , 
         iconUrl , 
         uv , 
         humidity , 
         wind , 
-        hourlyTmp ,
-        nextIconUrl,
-        nextCondition ,
-        avgtmpDeg
+        forecastObj1,
+        forecastObj2,
+        forecastObj3
+        
     }
 
 }    
