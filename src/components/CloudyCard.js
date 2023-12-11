@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function CloudyCard({
+  city ,
   p = null,
   icon = null ,
   degree = null,
@@ -48,7 +49,7 @@ export default function CloudyCard({
         }
 
         {linkStr && (
-              <a href="http://" transform="translate(80, 165)">
+              <a href={`/app?place=${city}`} transform="translate(80, 165)">
                 <text textAnchor="start" fill="black"  fontSize="23" >{linkStr}</text>
               </a>
             )}

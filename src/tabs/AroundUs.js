@@ -110,6 +110,7 @@ export default function AroundUs() {
         <div className='flexColumn alignCenter'>
           {!loading1 &&
             <CloudyCard
+              city = {city1Weather.city}
               degree={`${city1Weather.tempDeg}${tmpDegreeFormat}`}
               linkStr={`${city1Weather.condition} >`}
               title={city1Weather.city}
@@ -121,6 +122,7 @@ export default function AroundUs() {
 
           {!loading2 &&
             <CloudyCard
+              city = {city2Weather.city}
               degree={`${city2Weather.tempDeg}${tmpDegreeFormat}`}
               linkStr={`${city2Weather.condition} >`}
               title={city2Weather.city}
@@ -132,6 +134,7 @@ export default function AroundUs() {
 
           {!loading3 &&
             <CloudyCard
+              city = {city3Weather.city} 
               degree={`${city3Weather.tempDeg}${tmpDegreeFormat}`}
               linkStr={`${city3Weather.condition} >`}
               title={city3Weather.city}

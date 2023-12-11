@@ -9,9 +9,20 @@ import getRequest from '../backend/getRequest';
 import { dayData , forecastFunc } from "../backend/formatData";
 
 export default function Main() {
+  
+  // const [ location , setLocation ] = useState ();
+  let location;
+  // Extract parameters
+  const searchParams = new URLSearchParams(window.location.search);
+
+  if (searchParams.size > 0 ) {
+    console.log("entered the null condition");
+    location = searchParams.get('place');
+  }else{
+    location = localStorage.getItem('weatherLocation') || "Dubai" ;
+  }
+   
   const [loading, setLoading] = useState(true);
-    
-  let location = localStorage.getItem('weatherLocation') || "Dubai" ;
   
   let storageDegreeFormat = localStorage.getItem('weatherDegree') ;
   let tmpDegreeFormat = "°F";
@@ -40,6 +51,7 @@ export default function Main() {
   const [ day5Formatted , setDay5Formatted] = useState();
   const [ day6Formatted , setDay6Formatted] = useState();
   const [ houlryGraphData , setHoulryGraphData] = useState();
+  const [ uvReader , setUvReader ] = useState();
   
   useEffect(() => {    
     const fetchData = async () => {
@@ -60,7 +72,6 @@ export default function Main() {
         console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
-
       }
     };
     fetchData();
@@ -79,6 +90,18 @@ export default function Main() {
         }
       }
       setHoulryGraphData(someArr);
+    
+      if (days3Formatted.uv <= 2 ) {
+        setUvReader("Low");       
+      }else if (days3Formatted.uv >= 3 &&  days3Formatted.uv <= 5) {
+        setUvReader("Moderate");       
+      }else if (days3Formatted.uv >= 6 &&  days3Formatted.uv <= 7) {
+        setUvReader("High Risk");       
+      }else if (days3Formatted.uv >= 8 &&  days3Formatted.uv <= 10) {
+        setUvReader("Very High");       
+      }else{
+        setUvReader("Extreme");
+      }
     }
   }, [days3Formatted]);
 
@@ -120,19 +143,22 @@ export default function Main() {
       
       <div className='flexInline justifyBetween my2'>
         <CloudyCard
-         p = {days3Formatted.uv}
+         city = {days3Formatted.city}
+         p = {uvReader}
          title = "UV Index"
          icon = "https://cdn.weatherapi.com/weather/64x64/day/113.png"
         />
 
         <CloudyCard
-         p = {days3Formatted.humidity}
+         city = {days3Formatted.city}
+         p = {`${days3Formatted.humidity}%`}
          title = "Humidity"
          icon = "https://cdn.weatherapi.com/weather/64x64/day/116.png"
          />
 
       <CloudyCard
-         p = {days3Formatted.wind}
+         city = {days3Formatted.city}
+         p = {`${days3Formatted.wind} km/h`}
          title = "Wind"
          icon = "https://cdn.weatherapi.com/weather/64x64/day/122.png"
          />
@@ -152,42 +178,48 @@ export default function Main() {
 
          <div className='wheelDiv my2 flexInline alignCenter daysCloud' >
          <CloudyCard
+           city = {days3Formatted.city}
            degree={`${days3Formatted.tempDeg}${tmpDegreeFormat}`}
-           linkStr = {days3Formatted.condition}
+           linkStr = {`${days3Formatted.condition} >`}
            title = "Today"
            icon = {days3Formatted.iconUrl}
            />
          <CloudyCard
+           city = {days3Formatted.city}
            degree={`${days3Formatted.forecastObj2.avgtmpDeg}${tmpDegreeFormat}`}
-           linkStr = {days3Formatted.forecastObj2.nextCondition}
+           linkStr = {`${days3Formatted.forecastObj2.nextCondition} >`}
            title = "Tomorrow"
            icon = {days3Formatted.forecastObj2.nextIconUrl}
          />  
   
          <CloudyCard
+           city = {days3Formatted.city}
            degree={`${days3Formatted.forecastObj3.avgtmpDeg}${tmpDegreeFormat}`}
-           linkStr = {days3Formatted.forecastObj3.nextCondition}
+           linkStr = {`${days3Formatted.forecastObj3.nextCondition} >`}
            title = {days3Formatted.forecastObj3.dayOfWeek}
            icon = {days3Formatted.forecastObj3.nextIconUrl}
            />  
 
          <CloudyCard
+           city = {days3Formatted.city}
            degree={`${day4Formatted.avgtmpDeg}${tmpDegreeFormat}`}
-           linkStr = {day4Formatted.nextCondition}
+           linkStr = {`${day4Formatted.nextCondition} >`}
            title = {day4Formatted.dayOfWeek}
            icon = {day4Formatted.nextIconUrl}
            />  
 
          <CloudyCard
+           city = {days3Formatted.city}
            degree={`${day5Formatted.avgtmpDeg}${tmpDegreeFormat}`}
-           linkStr = {day5Formatted.nextCondition}
+           linkStr = {`${day5Formatted.nextCondition} >`}
            title = {day5Formatted.dayOfWeek}
            icon = {day5Formatted.nextIconUrl}
            />
 
          <CloudyCard
+           city = {days3Formatted.city}
            degree={`${day6Formatted.avgtmpDeg}${tmpDegreeFormat}`}
-           linkStr = {day6Formatted.nextCondition}
+           linkStr = {`${day6Formatted.nextCondition} >`}
            title = {day6Formatted.dayOfWeek}
            icon = {day6Formatted.nextIconUrl}
            />
