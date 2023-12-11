@@ -21,8 +21,10 @@ export default function Main() {
   }
 
   let dateObj = new Date();
-  
-  // get formatted date for the next three days forcast
+  // Create variables for the next five days
+  let fulldate3 = new Date(dateObj) ;
+  fulldate3.setDate(dateObj.getDate() + 2);
+
   let fulldate4 = new Date(dateObj);
   fulldate4.setDate(dateObj.getDate() + 3);
   let date4 = fulldate4.toISOString().split('T')[0];
@@ -152,41 +154,41 @@ export default function Main() {
 
          <div className='wheelDiv my2 flexInline alignCenter daysCloud' >
          <CloudyCard
-           degree={`${days3Formatted.tempDeg}${tmpDegreeFormat}`}
+           degree = {days3Formatted.tempDeg}
            linkStr = {days3Formatted.condition}
            title = "Today"
            icon = {days3Formatted.iconUrl}
            />
          <CloudyCard
-           degree={`${days3Formatted.forecastObj2.avgtmpDeg}${tmpDegreeFormat}`}
+           degree = {days3Formatted.forecastObj2.avgtmpDeg}
            linkStr = {days3Formatted.forecastObj2.nextCondition}
            title = "Tomorrow"
            icon = {days3Formatted.forecastObj2.nextIconUrl}
          />  
   
          <CloudyCard
-           degree={`${days3Formatted.forecastObj3.avgtmpDeg}${tmpDegreeFormat}`}
+           degree = {days3Formatted.forecastObj3.avgtmpDeg}
            linkStr = {days3Formatted.forecastObj3.nextCondition}
            title = {days3Formatted.forecastObj3.dayOfWeek}
            icon = {days3Formatted.forecastObj3.nextIconUrl}
            />  
 
          <CloudyCard
-           degree={`${day4Formatted.avgtmpDeg}${tmpDegreeFormat}`}
+           degree = {day4Formatted.avgtmpDeg}
            linkStr = {day4Formatted.nextCondition}
            title = {day4Formatted.dayOfWeek}
            icon = {day4Formatted.nextIconUrl}
            />  
 
          <CloudyCard
-           degree={`${day5Formatted.avgtmpDeg}${tmpDegreeFormat}`}
+           degree = {day5Formatted.avgtmpDeg}
            linkStr = {day5Formatted.nextCondition}
            title = {day5Formatted.dayOfWeek}
            icon = {day5Formatted.nextIconUrl}
            />
 
          <CloudyCard
-           degree={`${day6Formatted.avgtmpDeg}${tmpDegreeFormat}`}
+           degree = {day6Formatted.avgtmpDeg}
            linkStr = {day6Formatted.nextCondition}
            title = {day6Formatted.dayOfWeek}
            icon = {day6Formatted.nextIconUrl}

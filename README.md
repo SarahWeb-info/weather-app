@@ -35,7 +35,7 @@
 
       
       PAGE 3 : Weather around Us 
-      This would be weather around our country / favourite countries (saved from early search)(max 5)
+      This would be weather around our country / favourite countries (saved from early search)(max 3)
 
       COMPONENTS INSIDE :
 

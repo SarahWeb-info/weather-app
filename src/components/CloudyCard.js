@@ -39,30 +39,30 @@ export default function CloudyCard({
       <g textAnchor="start" stroke={rootColor}>
         
         {p && 
-          <text x="80" y="80" strokeWidth="2" fontSize="30" >{p}</text>
+          <text x="80" y="120" fontSize="30" >{p}</text>
         }
 
         {
           degree &&
-          <text x="80" y="80" fill="black" strokeWidth="3" fontSize="35">{degree}</text>
+          <text x="80" y="120" fill="black" strokeWidth="2" fontSize="35">{degree}</text>
         }
 
         {linkStr && (
-              <a href="http://" transform="translate(80, 150)">
-                <text textAnchor="start" fill="black" strokeWidth="2" fontSize="30">{linkStr}</text>
+              <a href="http://" transform="translate(80, 165)">
+                <text textAnchor="start" fill="black"  fontSize="23" >{linkStr}</text>
               </a>
             )}
         
         {icon && (
-            <image xlinkHref={icon} x="200" y="-55" width="280"  />
+            <image xlinkHref={icon} x="200" y="-20" width="250"  />
         )}
 
         {title && 
-          <text x="80" y="300" fill="black" strokeWidth="3" fontSize="35" >{title}</text>  
+          <text x="80" y="300" fill="black" strokeWidth="2" fontSize="35" >{title}</text>  
         }  
 
         {p2 && 
-        <text x="300" y="300" fill="black">{p2}</text>  
+        <text x="290" y="300" fill="black" fontSize="30">{p2}</text>  
         }
 
       </g>

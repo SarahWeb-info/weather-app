@@ -103,7 +103,7 @@ a{
   }
 
   /* aroundUs */
-  input[type="text"] {
+  .settingForm input[type="text"] {
     width: 90%;
     height: fit-content;
     border-radius: 3.34vw;
@@ -114,10 +114,52 @@ a{
     padding-left: 1vw;
     box-sizing: border-box;
   }
-  input::placeholder {
+  .settingForm input::placeholder {
     font-style: italic;
     font-size: small;
     padding-left: 1vw;
+  }
+
+  .aroundUsInput{
+    width: 90%;
+    height: auto;
+    border-radius: 3.34vw;
+    border: 1px solid var(--color);
+    background-color: transparent;
+    box-sizing: border-box;
+    margin: 3vh 2vw;
+  }
+
+  .aroundUsInput>input , .aroundUsInput>input:focus-visible{
+    width: 80%;
+    height: 100%;
+    border: 0px;
+    background-color: transparent;
+    box-sizing: border-box;
+    padding-left: 2vw;
+  }
+  .aroundUsInput>input:focus-visible{
+    color: var(--color);
+    font-size: large;
+    font-weight: bold;
+    outline: 0px;
+    border-right: 0.5px solid gray;
+  }
+  .aroundUsInput:active{
+    border: 3px solid white;
+  }
+
+  .aroundUsInput>button{
+    width: 20%;
+    border: 0px;
+    border-top-right-radius: 3.34;
+    border-bottom-right-radius: 3.34;
+    background-color: transparent;
+    box-sizing: border-box;
+    padding-left: 2vw;
+    color: var(--color);
+    font-weight: bold;
+    font-size: large;
   }
 
   .btn{
@@ -144,7 +186,7 @@ a{
   }
   .clouds{
     width: 80%;
-    max-width: 180px;
+    max-width: 210px;
     height: auto;
   }
 
